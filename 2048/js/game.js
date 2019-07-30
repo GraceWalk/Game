@@ -1,31 +1,34 @@
+let a = 0;
 $(document).keydown(function(event) {
-    switch (event.keyCode) {
-        case 37://left
-            if (moveLeft()) {
+    if(!a){
+        switch (event.keyCode) {
+            case 37://left
+                if (moveLeft()) {
+                    setTimeout('generateOneNumber()', 300);
+                    setTimeout('GameOver()', 500);
+                }
+                break;
+            case 38://up
+                if (moveUp()) {
+                    setTimeout('generateOneNumber()', 300);
+                    setTimeout('GameOver()', 500);
+                }
+                break;
+            case 39://right
+            if (moveRight()) {
                 setTimeout('generateOneNumber()', 300);
                 setTimeout('GameOver()', 500);
             }
-            break;
-        case 38://up
-            if (moveUp()) {
+                break;
+            case 40://down
+            if (moveDown()) {
                 setTimeout('generateOneNumber()', 300);
                 setTimeout('GameOver()', 500);
             }
-            break;
-        case 39://right
-        if (moveRight()) {
-            setTimeout('generateOneNumber()', 300);
-            setTimeout('GameOver()', 500);
+                break;
+            default:
+                break;
         }
-            break;
-        case 40://down
-        if (moveDown()) {
-            setTimeout('generateOneNumber()', 300);
-            setTimeout('GameOver()', 500);
-        }
-            break;
-        default:
-            break;
     }
 })
 
@@ -152,7 +155,23 @@ function moveRight() {
 //GameOver
 function GameOver() {
     if(!canMoveUp(board) && !canMoveLeft(board) && !canMoveDown(board) && !canMoveRight(board)) {
-        newgame();
-        alert('Game Over!');
+        $('#overScore').html('Score : ' + score);
+        $('#gameover').show();
+        a = 1;
+        setTimeout(
+            ()=>{        
+              $('#gameover').click(function() {
+                console.log(2)
+                $('#gameover').hide();
+                a = 0;
+                newgame();
+                })
+        $(document).keydown(function() {
+            console.log(1)
+            $('#gameover').hide();
+            a = 0;
+            newgame();
+        })
+        },1000) 
     }
 }

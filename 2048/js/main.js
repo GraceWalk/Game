@@ -17,6 +17,7 @@ let board = new Array();
 //初始化背景格子
 function init() {
     score = 0;
+    $('#score').html('0');
     for (let i = 0; i < 4; i++) {
         board[i] = new Array();
         for (let j = 0; j < 4; j++) {
