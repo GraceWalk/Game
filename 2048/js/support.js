@@ -9,17 +9,22 @@ function getPosLeft(i, j) {
 }
 
 //设置随机位置的随机数字
+let randBoard = [];
+let boardNum, rand;
 function generateOneNumber() {
-    let randx = Math.floor(Math.random() * 4);
-    let randy = Math.floor(Math.random() * 4);
-
-    while(true) {
-        if (board[randx][randy] === 0) {
-            break;
+        randBoard = [];
+        boardNum = 0;
+        for(let i = 0; i < 4; i++) {
+            for(let j = 0; j < 4; j++) {
+                if(board[i][j] === 0) {
+                    randBoard[boardNum++] = [i, j];
+                }
+            }
         }
-        randx = Math.floor(Math.random() * 4);
-        randy = Math.floor(Math.random() * 4);
-    }
+        if (randBoard.length === 0) return false;
+        rand = Math.floor(Math.random() * randBoard.length);
+        let randx = randBoard[rand][0];
+        let randy = randBoard[rand][1];
     board[randx][randy] = Math.random() < 0.5 ? 2 : 4;
     showNumberWithAnimation(randx, randy, board[randx][randy]);
 }
