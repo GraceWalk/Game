@@ -1,6 +1,8 @@
 $(function() {
     newgame();
 })
+
+//开始一轮新游戏
 function newgame() {
     //初始化棋盘
     init();
@@ -33,8 +35,9 @@ function init() {
     
 }
 
-//初始化内容格子
+//初始化内容格子,用来显示数字
 function updateBoardView() {
+    //清除当前格子
     $('.number-cell').remove();
     for (let i = 0; i < 4; i++) {
         for(let j = 0; j < 4; j++) {
@@ -42,6 +45,7 @@ function updateBoardView() {
             +i+"-"+j+"'></div>");
             if (board[i][j] != 0) {
             let numberCell = $("#number-cell-" + i + "-" + j);
+            //设置每个存在数字的格子的样式
             numberCell.css('top', getPosTop(i, j));
             numberCell.css('left', getPosLeft(i, j));
             numberCell.css('background-color', getNumberCellBgColor(board[i][j]));
@@ -51,5 +55,3 @@ function updateBoardView() {
         }
     }
 }
-
-

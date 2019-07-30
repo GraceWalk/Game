@@ -9,22 +9,20 @@ function getPosLeft(i, j) {
 }
 
 //设置随机位置的随机数字
-let randBoard = [];
-let boardNum, rand;
 function generateOneNumber() {
-        randBoard = [];
-        boardNum = 0;
-        for(let i = 0; i < 4; i++) {
-            for(let j = 0; j < 4; j++) {
-                if(board[i][j] === 0) {
-                    randBoard[boardNum++] = [i, j];
-                }
+    let randBoard = [];
+    let boardNum = 0;
+    for(let i = 0; i < 4; i++) {
+        for(let j = 0; j < 4; j++) {
+            if(board[i][j] === 0) {
+                randBoard[boardNum++] = [i, j];
             }
         }
-        if (randBoard.length === 0) return false;
+    }
+    if (randBoard.length === 0) return false;
         rand = Math.floor(Math.random() * randBoard.length);
-        let randx = randBoard[rand][0];
-        let randy = randBoard[rand][1];
+    let randx = randBoard[rand][0];
+    let randy = randBoard[rand][1];
     board[randx][randy] = Math.random() < 0.5 ? 2 : 4;
     showNumberWithAnimation(randx, randy, board[randx][randy]);
 }
@@ -122,6 +120,7 @@ function noBlockLeft(row, col1, col, board) {
     return true;
 }
 
+//判断两个方块之间有没有空格
 function noBlockUp(col, row1, row, board) {
     for (let i = row1 + 1; i < row; i++) {
         if (board[i][col] != 0) {
@@ -131,6 +130,7 @@ function noBlockUp(col, row1, row, board) {
     return true;
 }
 
+//判断两个方块之间有没有空格
 function noBlockDown(col, row1, row, board) {
     for (let i = row1 - 1; i > row; i--) {
         if (board[i][col] != 0) {
@@ -140,6 +140,7 @@ function noBlockDown(col, row1, row, board) {
     return true;
 }
 
+//判断两个方块之间有没有空格
 function noBlockRight(row, col1, col, board) {
     for (let i = col1 - 1; i > col; i--) {
         if (board[row][i] != 0) {

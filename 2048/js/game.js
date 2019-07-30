@@ -1,35 +1,30 @@
+//a用来在showEnd()函数中屏蔽上下左右移动按键
 let a = 0;
-$(document).keydown(function(event) {
+//绑定上下左右按键进行移动
+$(document).keydown(function(e) {
     if(a === 0){
-        switch (event.keyCode) {
+        switch (e.keyCode) {
             case 37://left
-                if (moveLeft()) {
+                if (moveLeft())
                     setTimeout('generateOneNumber()', 300);
-                    
-                }
                 break;
             case 38://up
-                if (moveUp()) {
+                if (moveUp())
                     setTimeout('generateOneNumber()', 300);
-                  
-                }
                 break;
             case 39://right
-            if (moveRight()) {
-                setTimeout('generateOneNumber()', 300);
-                
-            }
+                if (moveRight())
+                    setTimeout('generateOneNumber()', 300);
                 break;
             case 40://down
-            if (moveDown()) {
-                setTimeout('generateOneNumber()', 300);
-               
-            }
+                if (moveDown())
+                    setTimeout('generateOneNumber()', 300);
                 break;
             default:
                 break;
         }
-        GameOver()
+        Victory();
+        GameOver();
     }
 })
 
@@ -153,29 +148,45 @@ function moveRight() {
     return true;
 }
 
-//GameOver
+//游戏结束
 function GameOver() {
+    //判断是否不可以上下左右移动
     if(!canMoveUp(board) && !canMoveLeft(board) && !canMoveDown(board) && !canMoveRight(board)) {
-      
-        $('#overScore').html('Score : ' + score);
-        $('#gameover').show();
-        a = 1;
-
-        //
-        setTimeout(function() {        
-            $('#gameover').one('click', function() {
-                $('#gameover').hide(1000);
-                a = 0;
-                newgame();
-            })
-
-            $(document).one('keydown', function() {
-                $('#gameover').hide(1000);
-                a = 0;
-                newgame();
-            })
-
-        },1000)
+      showEnd('#gameover');
     }
 }
 
+//游戏胜利
+function Victory() {
+    for(let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            //游戏胜利条件
+            if (board[i][j] === 512) {
+                showEnd('#victory');
+                return false;
+            }
+        }
+    }
+}
+
+//展示结局画面并重置游戏
+function showEnd(end) {
+    $(end + ' #overScore').html('Score : ' + score);
+    $(end).show(500);
+    a = 1;
+
+    setTimeout(function() {  
+        //鼠标点击关闭展示界面      
+        $(end).one('click', function() {
+            $(end).hide(500);
+            a = 0;
+            newgame();
+        })
+        //按任意键关闭展示界面
+        $(document).one('keydown', function() {
+            $(end).hide(500);
+            a = 0;
+            newgame();
+        })
+    },1000)
+}

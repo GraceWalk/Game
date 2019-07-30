@@ -12,6 +12,7 @@ function showNumberWithAnimation(i, j ,randNumber) {
 
 }
 
+//展示移动不画
 function showMoveAnimation(fromx, fromy, tox, toy) {
     let numberCell = $("#number-cell-" + fromx + "-" + fromy);
     numberCell.animate({

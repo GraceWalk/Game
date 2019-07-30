@@ -52,7 +52,7 @@ header #newgamebutton {
     text-align: center;
 }
 
-.gameover-mask {
+.gameover-mask, .victory-mask {
     position: fixed;
     top: 0;
     left: 0;
@@ -61,7 +61,7 @@ header #newgamebutton {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.gameover-tip {
+.gameover-tip, .victory-tip {
     position: fixed;
     z-index: 20;
     top: 0;
@@ -77,14 +77,20 @@ header #newgamebutton {
     font-weight: bold;
 }
 
-.gameover .overScore {
+.victory-tip {
+    color: rgba(219, 5, 5, 0.582);
+}
+
+.gameover .overScore, .victory .overScore {
+    color: black;
     font-size: 35px;
     font-weight: 100;
 }
 
-.gameover .span2 {
+.gameover .span2, .victory .span2 {
     display: block;
     background-color: rgba(58, 33, 33, 0.5);
+    color: black;
     font-size: 16px;
     font-weight: 100;
 }
